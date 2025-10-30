@@ -1,11 +1,657 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ciri-Ciri Makhluk Hidup - IPA Kelas VII</title>
+    <style>
+        :root {
+            --primary: #2e7d32;
+            --primary-light: #4caf50;
+            --secondary: #ff9800;
+            --accent: #f44336;
+            --light: #f5f5f5;
+            --dark: #333;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .tab.active {
+            background-color: var(--light);
+            border-bottom: 3px solid var(--primary);
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .content-section {
+            display: none;
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .characteristic-card {
+            background-color: var(--light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .characteristic-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .characteristic-card .icon {
+            font-size: 1.5rem;
+        }
+        
+        .image-container {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+        
+        .quiz-container {
+            background-color: var(--light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .question {
+            margin-bottom: 1.5rem;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            padding: 10px;
+            background-color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .option:hover {
+            background-color: #e8f5e9;
+        }
+        
+        .option.selected {
+            background-color: #c8e6c9;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .option.correct {
+            background-color: #c8e6c9;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .option.incorrect {
+            background-color: #ffcdd2;
+            border-left: 4px solid var(--accent);
+        }
+        
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+        }
+        
+        .result {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .result.correct {
+            background-color: #e8f5e9;
+            color: var(--primary);
+        }
+        
+        .result.incorrect {
+            background-color: #ffebee;
+            color: var(--accent);
+        }
+        
+        .classification-game {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .item-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            cursor: grab;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .item-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .item-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .drop-zones {
+            display: flex;
+            justify-content: space-between;
+            margin: 1.5rem 0;
+        }
+        
+        .drop-zone {
+            flex: 1;
+            min-height: 200px;
+            background-color: var(--light);
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            margin: 0 0.5rem;
+        }
+        
+        .drop-zone.highlight {
+            border-color: var(--primary);
+            background-color: #e8f5e9;
+        }
+        
+        .feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .drop-zones {
+                flex-direction: column;
+            }
+            
+            .drop-zone {
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Bu Frada</h1>
+    <header>
+        <h1>Ciri-Ciri Makhluk Hidup</h1>
+        <p>Ilmu Pengetahuan Alam - Kelas VII SMP</p>
+    </header>
+    
+    <div class="container">
+        <div class="nav-tabs">
+            <div class="tab active" data-target="materi">Materi Pembelajaran</div>
+            <div class="tab" data-target="klasifikasi">Klasifikasi</div>
+            <div class="tab" data-target="kuis">Kuis Interaktif</div>
+            <div class="tab" data-target="game">Permainan</div>
+        </div>
+        
+        <!-- Materi Pembelajaran -->
+        <section id="materi" class="content-section active">
+            <h2>Ciri-Ciri Makhluk Hidup</h2>
+            <p>Makhluk hidup adalah segala sesuatu yang bernyawa dan memiliki ciri-ciri kehidupan seperti bernapas, bergerak, tumbuh, berkembang biak, dan peka terhadap rangsangan.</p>
+            
+            <div class="characteristic-card">
+                <h3><span class="icon">🏃</span> Bergerak</h3>
+                <p>Kemampuan untuk bergerak adalah salah satu ciri paling mencolok yang membedakan makhluk hidup dengan benda mati. Beberapa makhluk hidup bergerak secara aktif, sedangkan yang lain bergerak secara pasif.</p>
+                <div class="image-container">
+                    <img src="https://via.placeholder.com/600x300?text=Gambar+Makhluk+Hidup+Bergerak" alt="Makhluk Hidup Bergerak">
+                </div>
+            </div>
+            
+            <div class="characteristic-card">
+                <h3><span class="icon">🌱</span> Tumbuh dan Berkembang</h3>
+                <p>Pertumbuhan mengacu pada peningkatan ukuran atau jumlah sel, sedangkan perkembangan menggambarkan perubahan dalam bentuk dan fungsi selama siklus hidup makhluk hidup.</p>
+            </div>
+            
+            <div class="characteristic-card">
+                <h3><span class="icon">👶</span> Berkembang Biak</h3>
+                <p>Kemampuan reproduksi adalah ciri khas yang membedakan makhluk hidup dari benda mati. Melalui reproduksi, makhluk hidup dapat meneruskan genetik dan jenisnya.</p>
+                <div class="image-container">
+                    <img src="https://via.placeholder.com/600x300?text=Gambar+Perkembangbiakan" alt="Perkembangbiakan Makhluk Hidup">
+                </div>
+            </div>
+            
+            <div class="characteristic-card">
+                <h3><span class="icon">💡</span> Menanggapi Rangsang</h3>
+                <p>Respons terhadap rangsang dari lingkungan adalah kemampuan adaptif yang dimiliki oleh makhluk hidup. Rangsangan bisa berupa cahaya, suara, sentuhan, atau perubahan lingkungan lainnya.</p>
+            </div>
+            
+            <div class="characteristic-card">
+                <h3><span class="icon">🍎</span> Memerlukan Makanan</h3>
+                <p>Energi adalah kebutuhan utama bagi kehidupan makhluk hidup. Makhluk hidup mengambil energi dari lingkungannya melalui makanan, fotosintesis, atau sumber energi lainnya.</p>
+                <div class="image-container">
+                    <img src="https://via.placeholder.com/600x300?text=Gambar+Makanan+dan+Energi" alt="Makhluk Hidup Memerlukan Makanan">
+                </div>
+            </div>
+            
+            <div class="characteristic-card">
+                <h3><span class="icon">🌬️</span> Bernapas</h3>
+                <p>Bernapas adalah proses penting yang melibatkan pertukaran oksigen dan karbon dioksida antara makhluk hidup dengan lingkungannya.</p>
+            </div>
+            
+            <div class="characteristic-card">
+                <h3><span class="icon">🚽</span> Menghasilkan Zat Sisa</h3>
+                <p>Zat sisa adalah produk samping dari metabolisme dan aktivitas sel yang tidak dibutuhkan oleh tubuh. Makhluk hidup perlu mengeluarkan zat sisa untuk menjaga keseimbangan internal.</p>
+            </div>
+        </section>
+        
+        <!-- Klasifikasi Makhluk Hidup dan Benda Mati -->
+        <section id="klasifikasi" class="content-section">
+            <h2>Klasifikasi Makhluk Hidup dan Benda Mati</h2>
+            
+            <div class="characteristic-card">
+                <h3>Benda Hidup (Makhluk Hidup)</h3>
+                <p><strong>Ciri-ciri:</strong> bernapas, bergerak, tumbuh, berkembang biak, memerlukan makanan, dan peka terhadap rangsangan.</p>
+                <p><strong>Contoh:</strong> Manusia, hewan (kucing, anjing, burung), tumbuhan (pohon, bunga, rumput), jamur, dan bakteri.</p>
+            </div>
+            
+            <div class="characteristic-card">
+                <h3>Benda Mati</h3>
+                <p><strong>Ciri-ciri:</strong> tidak bernapas, tidak bergerak, tidak tumbuh, tidak berkembang biak, tidak memerlukan makanan, dan tidak peka terhadap rangsangan.</p>
+                <p><strong>Contoh:</strong> Batu, tanah, air, udara, api, meja, kursi, pakaian, kendaraan, dan peralatan elektronik.</p>
+            </div>
+            
+            <div class="image-container">
+                <img src="https://via.placeholder.com/600x300?text=Perbandingan+Makhluk+Hidup+dan+Benda+Mati" alt="Perbandingan Makhluk Hidup dan Benda Mati">
+            </div>
+        </section>
+        
+        <!-- Kuis Interaktif -->
+        <section id="kuis" class="content-section">
+            <h2>Kuis Interaktif</h2>
+            <p>Uji pemahaman Anda tentang ciri-ciri makhluk hidup dengan kuis berikut!</p>
+            
+            <div class="quiz-container">
+                <div class="question" id="question1">
+                    <h3>Pertanyaan 1: Di bawah ini yang termasuk benda mati adalah...</h3>
+                    <div class="options">
+                        <div class="option" data-correct="false">Kucing</div>
+                        <div class="option" data-correct="true">Kursi</div>
+                        <div class="option" data-correct="false">Pohon</div>
+                        <div class="option" data-correct="false">Burung</div>
+                    </div>
+                </div>
+                
+                <div class="question" id="question2">
+                    <h3>Pertanyaan 2: Pertumbuhan pada makhluk hidup ditunjukkan oleh....</h3>
+                    <div class="options">
+                        <div class="option" data-correct="false">Perubahan warna benda</div>
+                        <div class="option" data-correct="true">Bertambah besar dan tinggi</div>
+                        <div class="option" data-correct="false">Bergerak lebih cepat</div>
+                        <div class="option" data-correct="false">Bisa berbicara</div>
+                    </div>
+                </div>
+                
+                <div class="question" id="question3">
+                    <h3>Pertanyaan 3: Ciri makhluk hidup yang menunjukkan perlunya oksigen adalah...</h3>
+                    <div class="options">
+                        <div class="option" data-correct="false">Tumbuh</div>
+                        <div class="option" data-correct="true">Bernapas</div>
+                        <div class="option" data-correct="false">Bergerak</div>
+                        <div class="option" data-correct="false">Berkembang biak</div>
+                    </div>
+                </div>
+                
+                <div class="question" id="question4">
+                    <h3>Pertanyaan 4: Tumbuhan dapat bergerak dengan cara ...</h3>
+                    <div class="options">
+                        <div class="option" data-correct="false">Melompat ke tempat lain</div>
+                        <div class="option" data-correct="false">Mendorong benda mati</div>
+                        <div class="option" data-correct="true">Membuka dan menutup daunnya</div>
+                        <div class="option" data-correct="false">Berjalan mencari cahaya</div>
+                    </div>
+                </div>
+                
+                <div class="question" id="question5">
+                    <h3>Pertanyaan 5: Salah satu contoh makhluk hidup berkembang biak adalah...</h3>
+                    <div class="options">
+                        <div class="option" data-correct="false">Batu menjadi dua bagian</div>
+                        <div class="option" data-correct="true">Ayam bertelur</div>
+                        <div class="option" data-correct="false">Meja diukir</div>
+                        <div class="option" data-correct="false">Air mengalir ke bawah</div>
+                    </div>
+                </div>
+                
+                <button id="check-answers">Periksa Jawaban</button>
+                <div id="quiz-result" class="result hidden"></div>
+            </div>
+        </section>
+        
+        <!-- Permainan Klasifikasi -->
+        <section id="game" class="content-section">
+            <h2>Permainan Klasifikasi</h2>
+            <p>Seret dan lepaskan gambar ke dalam kategori yang tepat!</p>
+            
+            <div class="classification-game">
+                <div class="item-card" draggable="true" data-type="living">
+                    <img src="https://via.placeholder.com/150x100?text=Kucing" alt="Kucing">
+                    <p>Kucing</p>
+                </div>
+                <div class="item-card" draggable="true" data-type="nonliving">
+                    <img src="https://via.placeholder.com/150x100?text=Batu" alt="Batu">
+                    <p>Batu</p>
+                </div>
+                <div class="item-card" draggable="true" data-type="living">
+                    <img src="https://via.placeholder.com/150x100?text=Pohon" alt="Pohon">
+                    <p>Pohon</p>
+                </div>
+                <div class="item-card" draggable="true" data-type="nonliving">
+                    <img src="https://via.placeholder.com/150x100?text=Kursi" alt="Kursi">
+                    <p>Kursi</p>
+                </div>
+                <div class="item-card" draggable="true" data-type="living">
+                    <img src="https://via.placeholder.com/150x100?text=Burung" alt="Burung">
+                    <p>Burung</p>
+                </div>
+                <div class="item-card" draggable="true" data-type="nonliving">
+                    <img src="https://via.placeholder.com/150x100?text=Meja" alt="Meja">
+                    <p>Meja</p>
+                </div>
+            </div>
+            
+            <div class="drop-zones">
+                <div class="drop-zone" id="living-zone">
+                    <h3>Makhluk Hidup</h3>
+                    <p>Seret gambar makhluk hidup ke sini</p>
+                </div>
+                <div class="drop-zone" id="nonliving-zone">
+                    <h3>Benda Mati</h3>
+                    <p>Seret gambar benda mati ke sini</p>
+                </div>
+            </div>
+            
+            <button id="check-classification">Periksa Klasifikasi</button>
+            <div id="classification-feedback" class="feedback hidden"></div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>Modul Ajar IPA - Ciri-Ciri Makhluk Hidup</p>
+        <p>Disusun oleh: Fradha Dwi Arinditya, S.Pd - SMP PGRI Playen</p>
+        <p>Tahun Ajaran 2025/2026</p>
+    </footer>
+    
+    <script>
+        // Tab Navigation
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and content sections
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content section
+                tab.classList.add('active');
+                const targetId = tab.getAttribute('data-target');
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
+        
+        // Quiz Functionality
+        document.getElementById('check-answers').addEventListener('click', () => {
+            const questions = document.querySelectorAll('.question');
+            let correctAnswers = 0;
+            let totalQuestions = questions.length;
+            
+            questions.forEach(question => {
+                const options = question.querySelectorAll('.option');
+                let answered = false;
+                let correct = false;
+                
+                options.forEach(option => {
+                    if (option.classList.contains('selected')) {
+                        answered = true;
+                        if (option.getAttribute('data-correct') === 'true') {
+                            correct = true;
+                            correctAnswers++;
+                            option.classList.add('correct');
+                        } else {
+                            option.classList.add('incorrect');
+                            // Highlight correct answer
+                            options.forEach(opt => {
+                                if (opt.getAttribute('data-correct') === 'true') {
+                                    opt.classList.add('correct');
+                                }
+                            });
+                        }
+                    }
+                });
+                
+                if (!answered) {
+                    // If no answer selected, show correct answer
+                    options.forEach(opt => {
+                        if (opt.getAttribute('data-correct') === 'true') {
+                            opt.classList.add('correct');
+                        }
+                    });
+                }
+            });
+            
+            const resultElement = document.getElementById('quiz-result');
+            resultElement.classList.remove('hidden');
+            
+            const score = Math.round((correctAnswers / totalQuestions) * 100);
+            resultElement.textContent = `Skor Anda: ${score}% (${correctAnswers} dari ${totalQuestions} benar)`;
+            
+            if (score >= 80) {
+                resultElement.className = 'result correct';
+            } else {
+                resultElement.className = 'result incorrect';
+            }
+        });
+        
+        // Option Selection
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', () => {
+                const question = option.closest('.question');
+                question.querySelectorAll('.option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                option.classList.add('selected');
+            });
+        });
+        
+        // Drag and Drop Functionality
+        let draggedItem = null;
+        
+        document.querySelectorAll('.item-card').forEach(item => {
+            item.addEventListener('dragstart', () => {
+                draggedItem = item;
+                setTimeout(() => {
+                    item.style.display = 'none';
+                }, 0);
+            });
+            
+            item.addEventListener('dragend', () => {
+                setTimeout(() => {
+                    draggedItem.style.display = 'block';
+                    draggedItem = null;
+                }, 0);
+            });
+        });
+        
+        document.querySelectorAll('.drop-zone').forEach(zone => {
+            zone.addEventListener('dragover', e => {
+                e.preventDefault();
+                zone.classList.add('highlight');
+            });
+            
+            zone.addEventListener('dragleave', () => {
+                zone.classList.remove('highlight');
+            });
+            
+            zone.addEventListener('drop', e => {
+                e.preventDefault();
+                zone.classList.remove('highlight');
+                
+                if (draggedItem) {
+                    zone.appendChild(draggedItem);
+                    draggedItem.style.display = 'block';
+                }
+            });
+        });
+        
+        // Check Classification
+        document.getElementById('check-classification').addEventListener('click', () => {
+            const livingZone = document.getElementById('living-zone');
+            const nonlivingZone = document.getElementById('nonliving-zone');
+            const feedback = document.getElementById('classification-feedback');
+            
+            let correct = true;
+            let message = '';
+            
+            // Check living items
+            const livingItems = livingZone.querySelectorAll('.item-card');
+            livingItems.forEach(item => {
+                if (item.getAttribute('data-type') !== 'living') {
+                    correct = false;
+                }
+            });
+            
+            // Check nonliving items
+            const nonlivingItems = nonlivingZone.querySelectorAll('.item-card');
+            nonlivingItems.forEach(item => {
+                if (item.getAttribute('data-type') !== 'nonliving') {
+                    correct = false;
+                }
+            });
+            
+            // Check if all items are classified
+            const totalItems = document.querySelectorAll('.item-card').length;
+            if (livingItems.length + nonlivingItems.length !== totalItems) {
+                correct = false;
+                message = 'Masih ada item yang belum diklasifikasikan!';
+            } else if (correct) {
+                message = 'Selamat! Semua item telah diklasifikasikan dengan benar!';
+            } else {
+                message = 'Beberapa item belum berada di kategori yang tepat. Coba lagi!';
+            }
+            
+            feedback.textContent = message;
+            feedback.classList.remove('hidden');
+            
+            if (correct) {
+                feedback.style.backgroundColor = '#e8f5e9';
+                feedback.style.color = '#2e7d32';
+            } else {
+                feedback.style.backgroundColor = '#ffebee';
+                feedback.style.color = '#f44336';
+            }
+        });
+    </script>
 </body>
 </html>
